@@ -16,17 +16,23 @@ function getUsersChoice() {
     return usersChoiceLowerCase;
 }
 
-// function playSingleRound(computersSelection, playersSelection) {
-//      if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
-//         (computersSelection === 'scissors' && playersSelection === 'paper') ||
-//         (computersSelection === 'paper' && playersSelection === 'rock')) {
-//      return 'Computer wins!';
-//      } else {
-//         return 'Player wins!';
-//      }
-// } 
+function playSingleRound(computersSelection, playersSelection) {
+    if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
+        (computersSelection === 'scissors' && playersSelection === 'paper') ||
+        (computersSelection === 'paper' && playersSelection === 'rock')) {
+        return 'Computer wins!';
+    } else if (computersSelection === playersSelection) {
+        return "It's a tie!";
+    
+    } else {
+        return 'Player wins!';
+    }
+} 
 
-// console.log(playerChoice);
-console.log(getComputersChoice());
-// console.log(getUsersChoice())
-// console.log(playSingleRound(getComputersChoice(), getUsersChoice()));
+const computersChoice = getComputersChoice();
+console.log('computersChoice :', computersChoice)  // DO NOT CONSOLE.LOG A FUNCTION IF YOU DO NOT WANT TO EXCECUTE IT!!!
+
+const usersChoice = getUsersChoice();
+console.log('usersChoice :', usersChoice);
+
+console.log(playSingleRound(computersChoice, usersChoice));
