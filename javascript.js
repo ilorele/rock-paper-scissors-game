@@ -29,10 +29,108 @@ function playSingleRound(computersSelection, playersSelection) {
     }
 } 
 
-const computersChoice = getComputersChoice();
-console.log('computersChoice :', computersChoice)  // DO NOT CONSOLE.LOG A FUNCTION IF YOU DO NOT WANT TO EXCECUTE IT!!!
+function round() {
+    const computersChoice = getComputersChoice();
+    const playersChoice = getUsersChoice();
 
-const usersChoice = getUsersChoice();
-console.log('usersChoice :', usersChoice);
+    const result = playSingleRound(computersChoice, playersChoice);
+    console.log(result);
+    return result;
+}
 
-console.log(playSingleRound(computersChoice, usersChoice));
+function game() {
+    let roundResult = round();
+    let computerWins = 0;
+    let playerWins = 0;
+
+    if (roundResult === 'Computer wins!') {
+        computerWins += 1;
+    } else if (roundResult === 'Player wins!') {
+        playerWins += 1;
+    }
+
+    roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
+
+    if (roundResult === 'Computer wins!') {
+        computerWins += 1;
+    } else if (roundResult === 'Player wins!') {
+        playerWins += 1;
+    }
+
+    roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
+
+    if (roundResult === 'Computer wins!') {
+        computerWins += 1;
+    } else if (roundResult === 'Player wins!') {
+        playerWins += 1;
+    }
+
+    roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
+
+    if (roundResult === 'Computer wins!') {
+        computerWins += 1;
+    } else if (roundResult === 'Player wins!') {
+        playerWins += 1;
+    }
+
+    roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
+
+    if (roundResult === 'Computer wins!') {
+        computerWins += 1;
+    } else if (roundResult === 'Player wins!') {
+        playerWins += 1;
+    }
+
+    if (computerWins > playerWins) {
+        return "Computer wins the game!";
+    } else if (computerWins === playerWins) {
+        return "It is a tie...";
+    } else {
+        return "Player wins the game!";
+    }
+}
+
+console.log(game());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function game() {
+//     function round() {
+//         const computersChoice = getComputersChoice();
+//         const playersChoice = getUsersChoice();
+//         let result = playSingleRound(computersChoice,playersChoice);
+//         console.log(result);
+//         if (result === 'Computer wins!') {
+//             result = 1;
+//         } else {
+//             result = 0;
+//         }
+//         return result;
+//     }
+//     // console.log(round());
+//     // console.log(round());
+//     // console.log(round());
+//     let gameResult = (round() + round() + round());
+//     console.log(gameResult);
+//     if (gameResult >= 2) {
+//         return 'Computer wins the game!';
+//     } else {
+//         return 'Player wins the game!';
+//     }
+// }
+// console.log(game())
