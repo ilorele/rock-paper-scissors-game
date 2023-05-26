@@ -11,13 +11,20 @@ function getComputersChoice() {
 
 function getUsersChoice() {
     const usersChoice = prompt("Please enter 'Rock', 'Paper' or 'Scissors':", "Rock" );
-    const usersChoiceLowerCase = usersChoice.toLowerCase();
-
-    return usersChoiceLowerCase;
+    
+    if (usersChoice === null) {
+        alert("Canceled");
+        return null;
+    } else {
+        const usersChoiceLowerCase = usersChoice.toLowerCase();
+        return usersChoiceLowerCase;  
+    }      
 }
 
 function playSingleRound(computersSelection, playersSelection) {
-    if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
+    if ( playersSelection === null) {
+        return null;
+    } else if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
         (computersSelection === 'scissors' && playersSelection === 'paper') ||
         (computersSelection === 'paper' && playersSelection === 'rock')) {
         console.log(`You lose! ${computersSelection} beats ${playersSelection}!`)
@@ -35,8 +42,12 @@ function round() {
     const computersChoice = getComputersChoice();
     const playersChoice = getUsersChoice();
 
-    const result = playSingleRound(computersChoice, playersChoice);
-    return result;
+    if (playersChoice === null) {
+        return null;
+    } else {
+        const result = playSingleRound(computersChoice, playersChoice);
+        return result;
+    }   
 }
 
 // VERSION WITHOUT LOOP
@@ -100,10 +111,14 @@ function round() {
 function game() {
     let computerWins = 0;
     let playerWins = 0;
-
+    
     for (i = 0; i < 5; i++) {
         const roundResult = round();
 
+        if (roundResult === null) {
+            return;  // TUTAJ FUNKCJA SIE KONCZY WYKONYWAC JESLI JEST SPELNIONY WARUNEK
+        } 
+        
         if (roundResult === "Computer wins!") {
             computerWins++;
         } else if (roundResult === "Player wins!") {
