@@ -1,138 +1,111 @@
-// FIRST APPROACH:
+let playersScore = 0;
+let computersScore = 0;
+
+let playersWonGames = 0;
+let ComputersWonGames = 0;
+
+const rockBtnEl = document.querySelector(".rock-selection-btn");
+const paperBtnEl = document.querySelector(".paper-selection-btn");
+const scissorsBtnEl = document.querySelector(".scissors-selection-btn");
+
+let playersScoreDisplayEl = document.querySelector(".players-score");
+const computersScoreDisplayEl = document.querySelector(".computers-score");
+const playersGamesWonDisplayEl = document.querySelector(".players-games-won");
+const computersGamesWonDisplayEl = document.querySelector(".computers-games-won");
+
+const endGameMessage = document.querySelector(".end-game-message");
+
+const contentContainerEl = document.querySelector(".content-container");
+
+
 
 function getComputersChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     const computersChoiceIndex = Math.floor(Math.random() * choices.length);
-    // console.log(computersChoiceIndex)
     const computersChoice = choices[computersChoiceIndex];
 
     return computersChoice;
 }
 
-function getUsersChoice() {
-    const usersChoice = prompt("Please enter 'Rock', 'Paper' or 'Scissors':", "Rock" );
-    
-    if (usersChoice === null) {
-        alert("Canceled");
-        return null;
-    } else {
-        const usersChoiceLowerCase = usersChoice.toLowerCase();
-        return usersChoiceLowerCase;  
-    }      
-}
-
 function playSingleRound(computersSelection, playersSelection) {
-    if ( playersSelection === null) {
-        return null;
-    } else if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
+    if ((computersSelection === 'rock' && playersSelection === 'scissors') || 
         (computersSelection === 'scissors' && playersSelection === 'paper') ||
         (computersSelection === 'paper' && playersSelection === 'rock')) {
-        console.log(`You lose! ${computersSelection} beats ${playersSelection}!`)
+            endGameMessage.textContent = `You lose! ${computersSelection} beats ${playersSelection}!`;
+            computersScore++;
         return 'Computer wins!';
     } else if (computersSelection === playersSelection) {
-        console.log("It's a tie!")
+        endGameMessage.textContent = "It's a tie!";
         return "It's a tie!";
     } else {
-        console.log(`You win! ${playersSelection} beats ${computersSelection}!`)
+        endGameMessage.textContent = `You win! ${playersSelection} beats ${computersSelection}!`;
+        playersScore++;
         return 'Player wins!';
     }
 } 
 
-function round() {
+function round(playersChoice) {
     const computersChoice = getComputersChoice();
-    const playersChoice = getUsersChoice();
-
-    if (playersChoice === null) {
-        return null;
-    } else {
-        const result = playSingleRound(computersChoice, playersChoice);
-        return result;
-    }   
+    const result = playSingleRound(computersChoice, playersChoice);
+    return result;
 }
 
-// VERSION WITHOUT LOOP
-
-// function game() {
-//     let roundResult = round();
-//     let computerWins = 0;
-//     let playerWins = 0;
-
-//     if (roundResult === 'Computer wins!') {
-//         computerWins += 1;
-//     } else if (roundResult === 'Player wins!') {
-//         playerWins += 1;
-//     }
-
-//     roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
-
-//     if (roundResult === 'Computer wins!') {
-//         computerWins += 1;
-//     } else if (roundResult === 'Player wins!') {
-//         playerWins += 1;
-//     }
-
-//     roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
-
-//     if (roundResult === 'Computer wins!') {
-//         computerWins += 1;
-//     } else if (roundResult === 'Player wins!') {
-//         playerWins += 1;
-//     }
-
-//     roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
-
-//     if (roundResult === 'Computer wins!') {
-//         computerWins += 1;
-//     } else if (roundResult === 'Player wins!') {
-//         playerWins += 1;
-//     }
-
-//     roundResult = round();  // TO JEST ZMIANA WARTOSCI FUNKCJI!!! <3
-
-//     if (roundResult === 'Computer wins!') {
-//         computerWins += 1;
-//     } else if (roundResult === 'Player wins!') {
-//         playerWins += 1;
-//     }
-
-//     if (computerWins > playerWins) {
-//         return "Computer wins the game!";
-//     } else if (computerWins === playerWins) {
-//         return "It is a tie...";
-//     } else {
-//         return "Player wins the game!";
-//     }
-// }
-
-// console.log(game());
-
-// VERSION WITH LOOP
-
-function game() {
-    let computerWins = 0;
-    let playerWins = 0;
-    
-    for (i = 0; i < 5; i++) {
-        const roundResult = round();
-
-        if (roundResult === null) {
-            return;  // TUTAJ FUNKCJA SIE KONCZY WYKONYWAC JESLI JEST SPELNIONY WARUNEK
-        } 
-        
-        if (roundResult === "Computer wins!") {
-            computerWins++;
-        } else if (roundResult === "Player wins!") {
-            playerWins++;
-        }
-    }
-
-    if (computerWins > playerWins) {
-        return "Computer wins the game!";
-    } else if (computerWins === playerWins) {
-        return "It's a tie...";
+function endGame() {
+    if (playersScore > computersScore) {
+        endGameMessage.textContent = "Player wins the game!";
+        playersWonGames++;
+        playersGamesWonDisplayEl.textContent = playersWonGames;
     } else {
-        return "You win the game!";
+        endGameMessage.textContent = "Computer wins the game!";
+        ComputersWonGames++;
+        computersGamesWonDisplayEl.textContent = ComputersWonGames;
     }
 }
 
-console.log(game())
+function checkScore() {
+    playersScoreDisplayEl.textContent = playersScore;
+    computersScoreDisplayEl.textContent = computersScore;
+
+    if (playersScore === 5 || computersScore === 5) {
+        endGame();
+        createResetGameBtnEl();
+    }
+}
+
+function createResetGameBtnEl() {
+    const resetGameBtn = document.createElement("button");
+    resetGameBtn.classList.add("reset-game-btn");
+    resetGameBtn.textContent = "Play again?";
+    contentContainerEl.appendChild(resetGameBtn);
+
+    rockBtnEl.disabled = true;
+    paperBtnEl.disabled = true;
+    scissorsBtnEl.disabled = true;
+
+    resetGameBtn.addEventListener("click", resetGame);
+}
+
+function resetGame() {
+    playersScore = 0;
+    computersScore = 0;
+    playersScoreDisplayEl.textContent = 0;
+    computersScoreDisplayEl.textContent = 0;
+    endGameMessage.textContent = "";
+    contentContainerEl.removeChild(contentContainerEl.lastChild);
+
+    rockBtnEl.disabled = false;
+    paperBtnEl.disabled = false;
+    scissorsBtnEl.disabled = false;
+}
+
+function getPlayersChoice() {
+    const usersChoice = this.textContent.toLowerCase();
+    round(usersChoice);
+    checkScore();
+}
+
+rockBtnEl.addEventListener("click", getPlayersChoice);
+
+paperBtnEl.addEventListener("click", getPlayersChoice);
+
+scissorsBtnEl.addEventListener("click", getPlayersChoice);

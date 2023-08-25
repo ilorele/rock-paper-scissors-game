@@ -1,0 +1,84 @@
+body {
+    background-color: #522B5B;
+    color: #fbe4d8;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.content-container {
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.scores-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+    gap: 8px;
+}
+
+.players-container,
+.computers-container {
+    background-color: #2b124c80;
+    width: 340px;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 20px 10px #2b124c;
+}
+
+.single-game-score-container {
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.games-won-container {
+    font-size: 32px;
+}
+
+.selection-btns-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+.weapon-btn {
+    height: 60px;
+    width: 160px;
+    border-radius: 10px;
+    border: 2px solid #2b124c;
+    background-color: #854f6c;
+    color: #dfb6b2;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.weapon-btn:hover {
+    background-color: #854f6c80;
+    border: 3px solid #2b124c;
+}
+
+.weapon-btn:active{
+    background-color: #854f6c;
+    border: 2px solid #2b124c;
+}
+
+.weapon-btn:disabled {
+    background-color: rgba(239, 239, 239, 0.3);
+    color: rgba(16, 16, 16, 0.3);
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
+.reset-game-btn {
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #2b124c;
+    color: #fbe4d8;
+    border: none;
+    border-radius: 6px;
+}
+
+.reset-game-btn:hover {
+    background-color: #854f6c;
+}

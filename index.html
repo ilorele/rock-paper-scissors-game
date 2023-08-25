@@ -4,12 +4,50 @@
 
         <meta charset="UTF-8">
         <title>Rock Paper Scissors Game</title>
+        <link rel="stylesheet" href="./style.css">
 
     </head>
     
     <body>
+        <div class="content-container">
 
-        
+            <h1>Score 5 points to win the game!</h1>
+
+            <div class="scores-container">
+
+              <div class="players-container">
+                <div class="single-game-score-container">
+                    <div class="score-description">Player's score</div>
+                    <div class="players-score">0</div>
+                </div>
+                <div class="games-won-container">
+                    <div class="games-won-description">Games won</div>
+                    <div class="players-games-won">0</div>
+                </div>
+              </div>
+
+              <div class="computers-container">
+                <div class="single-game-score-container">
+                    <div class="score-description">Computer's score</div>
+                    <div class="computers-score">0</div>
+                </div>
+                <div class="games-won-container">
+                    <div class="games-won-description">Games won</div>
+                    <div class="computers-games-won">0</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="selection-btns-container">
+                <button class="rock-selection-btn weapon-btn">Rock</button>
+                <button class="paper-selection-btn weapon-btn">Paper</button>
+                <button class="scissors-selection-btn weapon-btn">Scissors</button>
+            </div>
+
+            <div class="end-game-message"></div>
+            
+        </div>
 
         <script src="./javascript.js"></script>
 
